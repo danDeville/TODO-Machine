@@ -207,7 +207,7 @@ const App = () => {
                     w-full h-full
                   "
                 >
-                  <img className="h-56" src="https://res.cloudinary.com/dz8on44po/image/upload/v1652131462/R2S2/xdeyu2mjpobcsa8katca.svg" alt="Empty State Image"/>
+                  <img className="h-56" src="https://res.cloudinary.com/dz8on44po/image/upload/v1652131462/R2S2/xdeyu2mjpobcsa8katca.svg" alt="Empty State" />
                   <h2
                     className="
                       text-white dark:text-[#39394B]
