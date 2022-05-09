@@ -198,12 +198,36 @@ const App = () => {
               shadow-xl shadow-black dark:shadow-slate-200
             "
           >
-            <ul className="divide-y divide-slate-200">
-              {todos.map((todo) => (
-                <TodoItem key={todo.id} todo={todo} />
-              ))}
-            </ul>
+            {todos.length === 0
+              ? (
+                <div
+                  className="
+                    flex flex-col
+                    items-center justify-center
+                    w-full h-full
+                  "
+                >
+                  <img className="h-56" src="https://res.cloudinary.com/dz8on44po/image/upload/v1652131462/R2S2/xdeyu2mjpobcsa8katca.svg" alt="Empty State Image"/>
+                  <h2
+                    className="
+                      text-white dark:text-[#39394B]
+                      text-3xl font-light text-center mt-4
+                    "
+                  >
+                    No hay tareas
+                  </h2>
+                </div>
+              )
+              : (
+                <ul className="divide-y divide-slate-200">
+                  {todos.map((todo) => (
+                    <TodoItem key={todo.id} todo={todo} />
+                  ))}
+                </ul>
+              )
+            }
           </div>
+
           <footer
             className="
               flex flex-col sm:flex-row
