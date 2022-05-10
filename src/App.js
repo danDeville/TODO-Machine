@@ -32,6 +32,9 @@ export const todosReducer = (state = [], action) => {
       })
       return newTodos
     }
+    case "todo/remove": {
+      return state.filter((todo) => todo.id !== action.payload.id)
+    }
     default:
       return state
   }
@@ -66,41 +69,52 @@ function classNames(...classes) {
 const TodoItem = ({ todo }) => {
   const dispatch = useDispatch()
   return (
-    <div
-      onClick={() => dispatch({ type: "todo/complete", payload: todo })}
-      className="
-        flex flex-row
-        items-center justify-start
-        w-full p-6
-        cursor-pointer
+    <div className="group flex flex-row items-center justify-between p-6">
+      <section
+        onClick={() => dispatch({ type: "todo/complete", payload: todo })}
+        className="
+          flex flex-row
+          items-center justify-start
+          w-full cursor-pointer
+        "
+      >
+        <div
+          className={classNames(
+            todo.completed
+              ? "bg-gradient-to-b from-cyan-400 to-purple-600"
+              : "bg-transparent border",
+              "flex flex-row items-center justify-center w-8 h-8 rounded-full text-white mr-3"
+          )}
+        >
+          <i
+            style={{
+              display: todo.completed ? "block" : "none"
+            }}
+            class="ri-check-line"
+            >
+          </i>
+        </div>
+        <li
+          className={classNames(
+            todo.completed
+              ? "text-[#39394B] line-through dark:text-[#C9CCE7]"
+              : "text-[#C9CCE7] no-underline dark:text-[#39394B]",
+            "group w-full"
+          )}
+        >
+          {todo.title}
+        </li>
+      </section>
+
+      <button
+        className="
+        group-hover:inline-block hidden
+        text-2xl text-[#39394B] dark:text-[#9293A4]
       "
-    >
-      <div
-        className={classNames(
-          todo.completed
-            ? "bg-gradient-to-b from-cyan-400 to-purple-600"
-            : "bg-transparent border",
-            "flex flex-row items-center justify-center w-8 h-8 rounded-full text-white mr-3"
-        )}
+        onClick={() => dispatch({ type:"todo/remove", payload: todo }) }
       >
-        <i
-          style={{
-            display: todo.completed ? "block" : "none"
-          }}
-          class="ri-check-line"
-          >
-        </i>
-      </div>
-      <li
-        className={classNames(
-          todo.completed
-            ? "text-[#39394B] line-through dark:text-[#C9CCE7]"
-            : "text-[#C9CCE7] no-underline dark:text-[#39394B]",
-          "group w-full"
-        )}
-      >
-        {todo.title}
-      </li>
+        <i class="ri-close-line"></i>
+      </button>
     </div>
   )
 }
@@ -129,6 +143,7 @@ const App = () => {
         w-screen h-screen
         overflow-hidden
         bg-[#24263C] dark:bg-[#F9F9F9]
+        transition-all duration-500
       "
     >
       <header
@@ -207,7 +222,11 @@ const App = () => {
                     w-full h-full
                   "
                 >
-                  <img className="h-56" src="https://res.cloudinary.com/dz8on44po/image/upload/v1652131462/R2S2/xdeyu2mjpobcsa8katca.svg" alt="Empty State" />
+                  <img
+                    className="h-56"
+                    src="https://res.cloudinary.com/dz8on44po/image/upload/v1652131462/R2S2/xdeyu2mjpobcsa8katca.svg"
+                    alt="Empty State"
+                  />
                   <h2
                     className="
                       text-white dark:text-[#39394B]
