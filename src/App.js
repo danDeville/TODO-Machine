@@ -68,6 +68,7 @@ function classNames(...classes) {
 // Component TodoItem
 const TodoItem = ({ todo }) => {
   const dispatch = useDispatch()
+
   return (
     <div className="group flex flex-row items-center justify-between p-6">
       <section
@@ -174,7 +175,7 @@ const App = () => {
             "
           >
             <h1 className="text-4xl font-semibold text-white">
-              TODO
+              TODO Machine
             </h1>
 
             <div
